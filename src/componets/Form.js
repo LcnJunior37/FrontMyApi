@@ -7,37 +7,36 @@ export default class Form extends React.Component {
     id: ""
   };
   apiDelete() {
-    alert("entrou del");
-    axios
-      .put({
-        method: "Delete",
-        url: "http://localhost:3000/notes/" + this.state.id,
-        data: {
-          _id: this.state.id,
-          name: this.state.name,
-          email: this.state.email
-        }
-      })
+    axios({
+      method: "delete",
+      url: "http://localhost:3000/notes/" + this.state.id,
+      data: {
+        name: this.state.name,
+        email: this.state.email
+      }
+    })
       .then(response => {
-        console.log(response);
+        alert(response);
       })
       .catch(error => {
-        console.log(error);
+        alert(error);
       });
   }
 
   apiPut() {
-    const user = {
-      _id: this.state.id,
+    /* const user = {
       name: this.state.name,
       email: this.state.email
-    };
-    let ur = "http://localhost:3000/notes/" + this.state.id;
+    }; */
 
-    axios
-      .put(ur, {
-        user
-      })
+    axios({
+      method: "put",
+      url: "http://localhost:3000/notes/" + this.state.id,
+      data: {
+        name: this.state.name,
+        email: this.state.email
+      }
+    })
       .then(response => {
         alert(response);
       })
@@ -58,11 +57,12 @@ export default class Form extends React.Component {
         console.log(response);
       })
       .catch(error => {
-        console.log(error);
+        alert(error);
       });
   }
 
   change = e => {
+    console.log(e.target.name);
     this.setState({
       [e.target.name]: e.target.value
     });
